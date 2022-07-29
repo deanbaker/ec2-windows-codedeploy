@@ -17,6 +17,13 @@ Contrary to the tutorial, I am allowing RDP to machines to debug as we are still
 
 ## Build out the Infra stack
 
+
+
+
 ## Build the Continuous Deployment bit
 
 ## Automate the CD thing using S3 as a trigger
+
+
+# References
+[CDK Workshop](https://cdkworkshop.com/)
