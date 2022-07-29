@@ -22,7 +22,6 @@ export class Ec2Pipeline extends Construct {
             versioned: true
         });
 
-        
         const deploymentGroup = new codedeploy.ServerDeploymentGroup(this, 'DeploymentGroup', {
             deploymentGroupName: `${props.name}-deploymentGroup`,
             autoScalingGroups: [props.asg],
@@ -44,7 +43,7 @@ export class Ec2Pipeline extends Construct {
         const s3Artifact = new codepipeline.Artifact()
         const sourceAction = new codepipeline_actions.S3SourceAction({
             actionName: 'S3Source',
-            bucketKey: 'MyWebApp2.zip',
+            bucketKey: props.objectKey,
             bucket: deployBucket,
             output: s3Artifact,
             trigger: codepipeline_actions.S3Trigger.EVENTS, // default: S3Trigger.POLL

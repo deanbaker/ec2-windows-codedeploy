@@ -8,7 +8,6 @@ import { Ec2LoadBalanced } from './ec2-loadbalanced';
 import { Ec2Pipeline } from './ec2-pipeline';
 
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
-
 export class CdkInfraStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
@@ -37,9 +36,6 @@ export class CdkInfraStack extends Stack {
       ]
     });
 
-    /**
-     * Create the EC2, 
-     */
     const ec2Lb = new Ec2LoadBalanced(this, "ec2lb", {
       vpc: vpc,
       ami: webServerAMI,

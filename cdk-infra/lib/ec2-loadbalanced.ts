@@ -3,7 +3,7 @@ import autoscaling = require('aws-cdk-lib/aws-autoscaling');
 import iam = require('aws-cdk-lib/aws-iam');
 import elbv2 = require('aws-cdk-lib/aws-elasticloadbalancingv2')
 import { Construct } from 'constructs';
-import { IAutoScalingGroup } from 'aws-cdk-lib/aws-autoscaling';
+import { AutoScalingGroup, IAutoScalingGroup } from 'aws-cdk-lib/aws-autoscaling';
 import { IApplicationLoadBalancerTarget } from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 
 export interface Ec2LoadBalancedProps {
@@ -17,7 +17,7 @@ export interface Ec2LoadBalancedProps {
 
 export class Ec2LoadBalanced extends Construct {
 
-    public readonly asg: IAutoScalingGroup;
+    public readonly asg: AutoScalingGroup;
 
     constructor(scope: Construct, id: string, props: Ec2LoadBalancedProps) {
         super(scope, id);
