@@ -31,7 +31,8 @@ export class CdkInfraStack extends Stack {
 
     // Where we will host our artefacts to depoloy
     const deployBucket = new s3.Bucket(this, 'MyDeployableAssets', {
-      publicReadAccess: false
+      publicReadAccess: false,
+      versioned: true
     });
 
     // Role for the EC2 instance to download the deployable artefact
