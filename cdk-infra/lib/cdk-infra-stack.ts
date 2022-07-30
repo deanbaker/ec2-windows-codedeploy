@@ -7,7 +7,6 @@ import elbv2 = require('aws-cdk-lib/aws-elasticloadbalancingv2')
 import { Ec2LoadBalanced } from './ec2-loadbalanced';
 import { Ec2Pipeline } from './ec2-pipeline';
 
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 export class CdkInfraStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);

@@ -22,7 +22,7 @@ export class Ec2LoadBalanced extends Construct {
     constructor(scope: Construct, id: string, props: Ec2LoadBalancedProps) {
         super(scope, id);
 
-        const asg = new autoscaling.AutoScalingGroup(this, 'ASG', {
+        this.asg = new autoscaling.AutoScalingGroup(this, 'ASG', {
             vpc: props.vpc,
             instanceType: ec2.InstanceType.of(ec2.InstanceClass.T2, ec2.InstanceSize.LARGE),
             machineImage: props.ami,
@@ -33,8 +33,6 @@ export class Ec2LoadBalanced extends Construct {
             desiredCapacity: 2,
             autoScalingGroupName: `${props.name} EC2 ASG`
         });
-        // expose the scaling group
-        this.asg = asg
 
         const lb = new elbv2.ApplicationLoadBalancer(this, 'lb', {
             vpc: props.vpc,
@@ -43,13 +41,12 @@ export class Ec2LoadBalanced extends Construct {
 
         const httpListener = lb.addListener("http", {
             port: 80,
-
         })
 
         const targetGroup = httpListener.addTargets("TG", {
             port: 80,
             protocol: elbv2.ApplicationProtocol.HTTP,
-            targets: [asg]
+            targets: [this.asg]
         })
     }
 }
