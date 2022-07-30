@@ -3,8 +3,8 @@ import autoscaling = require('aws-cdk-lib/aws-autoscaling');
 import iam = require('aws-cdk-lib/aws-iam');
 import elbv2 = require('aws-cdk-lib/aws-elasticloadbalancingv2')
 import { Construct } from 'constructs';
-import { AutoScalingGroup, IAutoScalingGroup } from 'aws-cdk-lib/aws-autoscaling';
-import { IApplicationLoadBalancerTarget } from 'aws-cdk-lib/aws-elasticloadbalancingv2';
+import { AutoScalingGroup } from 'aws-cdk-lib/aws-autoscaling';
+import { CfnOutput } from 'aws-cdk-lib';
 
 export interface Ec2LoadBalancedProps {
     vpc: ec2.IVpc;
@@ -48,5 +48,6 @@ export class Ec2LoadBalanced extends Construct {
             protocol: elbv2.ApplicationProtocol.HTTP,
             targets: [this.asg]
         })
+        new CfnOutput(this, 'loadbalancer-url', { value: lb.loadBalancerDnsName });
     }
 }

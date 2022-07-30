@@ -5,6 +5,7 @@ import codepipeline = require('aws-cdk-lib/aws-codepipeline')
 import codepipeline_actions = require('aws-cdk-lib/aws-codepipeline-actions')
 import cloudtrail = require('aws-cdk-lib/aws-cloudtrail')
 import s3 = require('aws-cdk-lib/aws-s3')
+import { CfnOutput } from 'aws-cdk-lib';
 
 export interface Ec2PipelineProps {
     asg: IAutoScalingGroup;
@@ -21,6 +22,7 @@ export class Ec2Pipeline extends Construct {
             publicReadAccess: false,
             versioned: true
         });
+        new CfnOutput(this, 'deploy-bucket-name', { value: deployBucket.bucketName});
 
         const deploymentGroup = new codedeploy.ServerDeploymentGroup(this, 'DeploymentGroup', {
             deploymentGroupName: `${props.name}-deploymentGroup`,

@@ -1,0 +1,9 @@
+version: 0.0
+os: windows
+files:
+  - source: \
+    destination: c:\inetpub\wwwroot\MyWebApp
+hooks:
+  BeforeInstall:
+    - location: \installScripts\createwebsite.ps1
+      timeout: 300
