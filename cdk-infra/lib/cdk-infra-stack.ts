@@ -6,6 +6,7 @@ import autoscaling = require('aws-cdk-lib/aws-autoscaling');
 import elbv2 = require('aws-cdk-lib/aws-elasticloadbalancingv2')
 import { Ec2LoadBalanced } from './ec2-loadbalanced';
 import { Ec2Pipeline } from './ec2-pipeline';
+import { env } from 'process';
 
 export class CdkInfraStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
